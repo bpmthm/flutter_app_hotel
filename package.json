@@ -1,0 +1,32 @@
+{
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^17.0.0",
+    "express": "^5.1.0",
+    "mongodb": "^6.17.0",
+    "mongoose": "^8.16.1",
+    "morgan": "^1.10.0"
+  },
+  "scripts": {
+    "start": "node server.js"
+  },
+  "name": "flutter_application_hotel",
+  "description": "A new Flutter project.",
+  "version": "1.0.0",
+  "main": "server.js",
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bpmthm/flutter_app_hotel.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bpmthm/flutter_app_hotel/issues"
+  },
+  "homepage": "https://github.com/bpmthm/flutter_app_hotel#readme"
+}
