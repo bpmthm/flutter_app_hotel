@@ -1,4 +1,4 @@
-const Reservasi = require('../models/Reservasi');
+const Reservasi = require('../models/reservasi');
 
 exports.getAllReservasi = async (req, res) => {
   const data = await Reservasi.find();

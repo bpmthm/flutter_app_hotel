@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 class FasilitasController {
-  static const baseUrl = 'http://192.168.1.12:3000/api/fasilitas';
+  static const baseUrl = 'http://192.168.1.11:3000/api/fasilitas';
 
   static Future<List<dynamic>> getFasilitas() async {
     final res = await http.get(Uri.parse(baseUrl));

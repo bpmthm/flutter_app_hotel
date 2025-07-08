@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import '../controllers/kamarController.dart';
-import 'detail_kamar_page.dart'; // Pastikan file ini ada di folder pages
+import 'detail_kamar_page.dart';
 
 class KamarListScreen extends StatefulWidget {
   const KamarListScreen({super.key});
@@ -23,19 +23,19 @@ class _KamarListScreenState extends State<KamarListScreen> {
     return Chip(
       label: Text(tersedia ? 'Tersedia' : 'Tidak Tersedia'),
       backgroundColor: tersedia ? Colors.green : Colors.grey,
-      labelStyle: TextStyle(color: Colors.white),
+      labelStyle: const TextStyle(color: Colors.white),
     );
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Daftar Kamar')),
+      appBar: AppBar(title: const Text('Daftar Kamar')),
       body: FutureBuilder<List<dynamic>>(
         future: _kamarList,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(child: CircularProgressIndicator());
+            return const Center(child: CircularProgressIndicator());
           }
           if (snapshot.hasError) {
             return Center(child: Text('Error: ${snapshot.error}'));
@@ -43,13 +43,14 @@ class _KamarListScreenState extends State<KamarListScreen> {
 
           final kamar = snapshot.data!;
           if (kamar.isEmpty) {
-            return Center(child: Text('Tidak ada kamar tersedia.'));
+            return const Center(child: Text('Tidak ada kamar tersedia.'));
           }
 
           return ListView.builder(
             itemCount: kamar.length,
             itemBuilder: (context, i) {
               final item = kamar[i];
+
               return GestureDetector(
                 onTap: () {
                   Navigator.push(
@@ -60,15 +61,15 @@ class _KamarListScreenState extends State<KamarListScreen> {
                   );
                 },
                 child: Card(
-                  margin: EdgeInsets.all(8),
+                  margin: const EdgeInsets.all(8),
                   child: ListTile(
-                    leading: Icon(Icons.bed),
-                    title: Text('Kamar ${item['nomor']} - ${item['tipe']}'),
+                    leading: const Icon(Icons.bed),
+                    title: Text('Kamar ${item['nomor'] ?? '-'} - ${item['tipe'] ?? '-'}'),
                     subtitle: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text('Harga: Rp${NumberFormat('#,###').format(item['harga'])}'),
-                        _ketersediaanChip(item['tersedia']),
+                        Text('Harga: Rp${NumberFormat('#,###').format(item['harga'] ?? 0)}'),
+                        _ketersediaanChip(item['tersedia'] ?? false),
                       ],
                     ),
                   ),

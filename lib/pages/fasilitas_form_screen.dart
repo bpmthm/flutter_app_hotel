@@ -1,48 +1,72 @@
 import 'package:flutter/material.dart';
-import '../controllers/fasilitasController.dart';
 
-class FasilitasListScreen extends StatefulWidget {
-  const FasilitasListScreen({super.key});
+class FasilitasFormScreen extends StatefulWidget {
+  const FasilitasFormScreen({super.key});
 
   @override
-  _FasilitasListScreenState createState() => _FasilitasListScreenState();
+  State<FasilitasFormScreen> createState() => _FasilitasFormScreenState();
 }
 
-class _FasilitasListScreenState extends State<FasilitasListScreen> {
-  late Future<List<dynamic>> _fasilitasList;
-
-  @override
-  void initState() {
-    super.initState();
-    _fasilitasList = FasilitasController.getFasilitas();
-  }
+class _FasilitasFormScreenState extends State<FasilitasFormScreen> {
+  final List<Map<String, dynamic>> fasilitas = [
+    {
+      'nama': 'Kolam Renang',
+      'icon': Icons.pool,
+      'deskripsi': 'Kolam renang outdoor untuk dewasa dan anak-anak.',
+    },
+    {
+      'nama': 'Wi-Fi Gratis',
+      'icon': Icons.wifi,
+      'deskripsi': 'Internet gratis tersedia di seluruh area hotel.',
+    },
+    {
+      'nama': 'Gym / Fitness Center',
+      'icon': Icons.fitness_center,
+      'deskripsi': 'Peralatan olahraga lengkap dan modern.',
+    },
+    {
+      'nama': 'Restoran',
+      'icon': Icons.restaurant,
+      'deskripsi': 'Menu lokal & internasional tersedia setiap hari.',
+    },
+    {
+      'nama': 'Parkir Gratis',
+      'icon': Icons.local_parking,
+      'deskripsi': 'Area parkir luas dan aman tanpa biaya tambahan.',
+    },
+    {
+      'nama': 'Spa & Sauna',
+      'icon': Icons.spa,
+      'deskripsi': 'Layanan pijat, sauna, dan relaksasi premium.',
+    },
+    {
+      'nama': 'Layanan Kamar 24 Jam',
+      'icon': Icons.room_service,
+      'deskripsi': 'Layanan pesan makanan/minuman langsung ke kamar.',
+    },
+    {
+      'nama': 'Antar Jemput Bandara',
+      'icon': Icons.airport_shuttle,
+      'deskripsi': 'Layanan shuttle hotel ke bandara PP.',
+    },
+  ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Fasilitas Hotel')),
-      body: FutureBuilder<List<dynamic>>(
-        future: _fasilitasList,
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) return Center(child: CircularProgressIndicator());
-          if (snapshot.hasError) return Center(child: Text('Error: ${snapshot.error}'));
-
-          final fasilitas = snapshot.data!;
-          if (fasilitas.isEmpty) return Center(child: Text('Tidak ada fasilitas.'));
-
-          return ListView.builder(
-            itemCount: fasilitas.length,
-            itemBuilder: (context, i) {
-              final item = fasilitas[i];
-              return Card(
-                margin: EdgeInsets.all(8),
-                child: ListTile(
-                  leading: Icon(Icons.hotel),
-                  title: Text(item['nama']),
-                  subtitle: Text(item['deskripsi'] ?? '-'),
-                ),
-              );
-            },
+      appBar: AppBar(title: const Text('Fasilitas Hotel')),
+      body: ListView.builder(
+        padding: const EdgeInsets.all(16),
+        itemCount: fasilitas.length,
+        itemBuilder: (context, index) {
+          final item = fasilitas[index];
+          return Card(
+            margin: const EdgeInsets.symmetric(vertical: 8),
+            child: ListTile(
+              leading: Icon(item['icon'], size: 40, color: Colors.blue),
+              title: Text(item['nama'], style: TextStyle(fontWeight: FontWeight.bold)),
+              subtitle: Text(item['deskripsi']),
+            ),
           );
         },
       ),

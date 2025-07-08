@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'home_screen.dart'; // Ganti dengan screen tujuan lo
+import 'home_screen.dart';
+import 'admin_login_screen.dart'; // Tambahin ini
 
 class LandingScreen extends StatelessWidget {
   const LandingScreen({super.key});
@@ -39,37 +40,44 @@ class LandingScreen extends StatelessWidget {
                     ),
                   ),
 
-                 
-
                   // Hotel in text
                   Positioned(
-                    top: isWide ? 200 : MediaQuery.of(context).size.height * 0.25,
+                    top: isWide
+                        ? 200
+                        : MediaQuery.of(context).size.height * 0.25,
                     left: 0,
                     right: 0,
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          'Hotel',
+                          'Hotelin',
                           style: TextStyle(
                             fontSize: 38,
                             fontWeight: FontWeight.bold,
                             color: Colors.white,
+                            shadows: [
+                              Shadow(
+                                color: Colors.black.withOpacity(0.5),
+                                offset: Offset(2, 2),
+                                blurRadius: 4,
+                              ),
+                            ],
                           ),
                         ),
-                        Container(
-                          padding: EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(6),
-                          ),
-                          child: Text(
-                            'in',
-                            style: TextStyle(
-                              color: Colors.teal.shade700,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 18,
-                            ),
+                        Text(
+                          'Your Comfort, Our Priority',
+                          style: TextStyle(
+                            fontSize: 20,
+                            color: const Color.fromARGB(255, 0, 87, 121).withOpacity(0.8),
+                            fontWeight: FontWeight.w300,
+                            shadows: [
+                              Shadow(
+                                color: Colors.black.withOpacity(0.3),
+                                offset: Offset(1, 1),
+                                blurRadius: 2,
+                              ),
+                            ],
                           ),
                         ),
                       ],
@@ -83,9 +91,11 @@ class LandingScreen extends StatelessWidget {
                       width: double.infinity,
                       decoration: BoxDecoration(
                         color: Colors.white.withOpacity(0.9),
-                        borderRadius: BorderRadius.vertical(top: Radius.circular(28)),
+                        borderRadius:
+                            const BorderRadius.vertical(top: Radius.circular(28)),
                       ),
-                      padding: EdgeInsets.symmetric(horizontal: 24, vertical: 32),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 24, vertical: 32),
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
                         children: [
@@ -102,34 +112,55 @@ class LandingScreen extends StatelessWidget {
                           ElevatedButton(
                             style: ElevatedButton.styleFrom(
                               backgroundColor: Colors.teal.shade700,
-                              shape: StadiumBorder(),
-                              padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                              shape: const StadiumBorder(),
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 24, vertical: 12),
                             ),
                             onPressed: () {
                               Navigator.push(
                                 context,
                                 PageRouteBuilder(
-                                  transitionDuration: Duration(milliseconds: 600),
-                                  pageBuilder: (_, __, ___) => HomeScreen(),
+                                  transitionDuration:
+                                      const Duration(milliseconds: 600),
+                                  pageBuilder: (_, __, ___) =>
+                                      HomeScreen(),
                                   transitionsBuilder: (_, anim, __, child) {
                                     final offsetAnim = Tween<Offset>(
-                                      begin: Offset(0.0, 1.0),
+                                      begin: const Offset(0.0, 1.0),
                                       end: Offset.zero,
-                                    ).animate(CurvedAnimation(parent: anim, curve: Curves.easeOut));
+                                    ).animate(CurvedAnimation(
+                                        parent: anim, curve: Curves.easeOut));
 
-                                    final fadeAnim = Tween<double>(begin: 0.0, end: 1.0).animate(anim);
+                                    final fadeAnim =
+                                        Tween<double>(begin: 0.0, end: 1.0)
+                                            .animate(anim);
 
                                     return SlideTransition(
                                       position: offsetAnim,
-                                      child: FadeTransition(opacity: fadeAnim, child: child),
+                                      child: FadeTransition(
+                                          opacity: fadeAnim, child: child),
                                     );
                                   },
                                 ),
                               );
                             },
-                            child: Text(
+                            child: const Text(
                               'Your Stay Starts Here',
                               style: TextStyle(fontSize: 14, color: Colors.white),
+                            ),
+                          ),
+                          const SizedBox(height: 8),
+                          TextButton(
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (_) => const AdminLoginScreen()),
+                              );
+                            },
+                            child: const Text(
+                              'Admin Login',
+                              style: TextStyle(color: Colors.teal),
                             ),
                           ),
                         ],
